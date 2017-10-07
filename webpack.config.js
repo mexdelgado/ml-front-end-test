@@ -6,3 +6,4 @@ export default [
   clientConfig,
   serverConfig
 ];
+
