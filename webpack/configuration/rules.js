@@ -4,27 +4,11 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 // Environment
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
-// Package.json
-import pkg from '../../package.json';
-
 export default type => {
   const rules = [
     {
       test: /\.js$/,
-      use: {
-        loader: 'babel-loader',
-        query: {
-          presets: [
-            [
-              'env', {
-                modules: false,
-                node: pkg.engines.node,
-                browsers: pkg.browserslist
-              }
-            ]
-          ]
-        }
-      },
+      use: 'babel-loader',
       exclude: /node_modules/
     }
   ];
