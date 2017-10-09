@@ -1,9 +1,10 @@
 export default function html(options) {
   const {
     app = 'main',
-    title = 'Codejobs',
-    stylesheet = '/css/style.css',
-    markup
+    title = 'Mercado Libre App',
+    stylesheet = '/assets/css/app.css',
+    markup,
+    initialState
   } = options;
 
   return `
@@ -19,6 +20,10 @@ export default function html(options) {
       <body>
         <div id="root">${markup}</div>
 
+        <script>
+          window.initialState = ${JSON.stringify(initialState)};
+        </script>
+        <script src="/app/vendor.bundle.js"></script>
         <script src="/app/${app}.bundle.js"></script>
       </body>
     </html>
