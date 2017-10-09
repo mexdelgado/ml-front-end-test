@@ -12,19 +12,136 @@ const endpoints = {
   categories: 'https://api.mercadolibre.com/categories/'
 };
 
+const utils = {
+  getItemProductResponse: function(data) {
+    let location = data.address ? data.address.state_name : '';
+    if(!location) location = data.seller_address ? data.seller_address.state.name : '';
+
+    return {
+      id: data.id,
+      title: data.title,
+      price: {
+        currency: data.currency_id,
+        amount: data.price
+      },
+      picture: data.thumbnail,
+      condition: data.condition,
+      free_shipping: data.shipping.free_shipping,
+      location: location
+    }
+  },
+
+  getCompleteItemProductResponse: function(data) {
+    let product = utils.getItemProductResponse(data);
+
+    product.sold_quantity = data.sold_quantity;
+    product.category = data.attributes.filter(e => e.attribute_group_id === 'MAIN').map(e => e.value_name);
+
+    return product;
+  }
+}
+
+const author = {
+  name: 'Maximiliano "Mex"',
+  lastname: 'Delgado'
+};
+
 router.get('/blog/posts', (req, res) => res.json(posts));
 
+// SEARCH
 router.get('/items', (req, res) => {
+
+  let query = req.query.search || '';
+
+  let data = {
+    author,
+    categories: [],
+    items: []
+  };
+
   request({
-      url: endpoints.search + "arduino",
+      url: endpoints.search + query,
       json: true
   }, function (error, response, body) {
       if (!error && response.statusCode === 200) {
-        res.json({
-          response: body.results
-        });
+
+        //console.log(body);
+
+        // Generate list of items
+        for(let i = 0; i < body.results.length; i++) {
+          let result = body.results[i];
+          let item = utils.getItemProductResponse(result);
+
+          data.items.push(item);
+        }
+
+        let categories = body.filters.filter(f => f.id === 'category')[0];
+
+        if(categories) {
+          let orderedCategories = categories.values.sort((a,b) => b.results - a.results);
+
+          request({
+            url: endpoints.categories + orderedCategories[0].id,
+            json: true
+          }, function (error, response, body) {
+            body.path_from_root.map(v => data.categories.push(v.name));
+            res.status(200).json(data);
+          });
+
+        } else {
+          res.status(200).json(data);
+        }
+
+      }else{
+        res.json(error);
       }
   });
+});
+
+// PRODUCT INFO
+router.get('/items/:id', (req, res) => {
+
+  let id = req.params.id;
+
+  let data = {
+    author,
+    item: {},
+  };
+
+  request({
+      uri: endpoints.items + id,
+      json: true
+  }, function (error, response, body) {
+      if (!error && response.statusCode === 200) {
+
+        //console.log(body);
+        data.item = utils.getCompleteItemProductResponse(body);
+
+        request({
+          uri: endpoints.items + id + '/description',
+          json: true
+        }, function (error, response, body) {
+          //console.log('[i] body:', body);
+          let itemDesc = '';
+
+          if(body.text != ""){
+            itemDesc = body.text;
+          }else if(body.plain_text != ""){
+            itemDesc = body.plain_text;
+          }
+
+          //console.log('[i] itemDesc:', itemDesc);
+          //return itemDesc;
+          data.item.description = itemDesc;
+
+          res.status(200).json(data);
+        });
+
+      }else{
+        res.status(400).json(error);
+      }
+  });
+
 });
 
 export default router;
