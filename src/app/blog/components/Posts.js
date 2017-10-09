@@ -6,7 +6,7 @@ import timeAgo from 'node-time-ago';
 import { isFirstRender } from '../../../shared/utils/data';
 
 // Styles
-import styles from './Posts.scss';
+//import styles from './Posts.scss';
 
 class Posts extends Component {
   render() {
@@ -17,13 +17,13 @@ class Posts extends Component {
     }
 
     return (
-      <div className={styles.posts}>
-        <div className={styles.header}>
+      <div className="posts">
+        <div className="header">
           <h1>Blog</h1>
         </div>
 
         {posts && posts.map(post =>
-          <div key={post.id} className={styles.posts}>
+          <div key={post.id} className="posts">
             <p>
               {post.id} - {post.title} by {post.author}
             </p>
