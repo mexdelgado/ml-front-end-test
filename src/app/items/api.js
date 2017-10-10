@@ -4,10 +4,10 @@ import { API } from './constants';
 // Utils
 import { apiFetch } from '../../shared/utils/api';
 
-class BlogApi {
+class MlApi {
   static getAllPosts(query = {}, fetchingFrom = 'client') {
-    return apiFetch(API.BLOG.POSTS, { fetchingFrom }, query);
+    return apiFetch(API.ML.ITEMS, { fetchingFrom }, query);
   }
 }
 
-export default BlogApi;
+export default MlApi;

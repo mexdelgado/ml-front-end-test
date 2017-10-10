@@ -1,5 +1,5 @@
 // Api
-import blogApi from './api';
+import MlApi from './api';
 
 // Action Types
 import { FETCH_POSTS } from './actionTypes';
@@ -16,6 +16,6 @@ export const fetchPosts = (fetchingFrom, query) => dispatch => {
 
   dispatch(requestPosts());
 
-  return blogApi.getAllPosts(query, fetchingFrom)
+  return MlApi.getAllPosts(query, fetchingFrom)
     .then(posts => dispatch(receivedPosts(posts)));
 };

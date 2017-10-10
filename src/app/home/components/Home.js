@@ -73,7 +73,10 @@ class Home extends Component {
             </li>
           </ul>
         </div>
-
+        Home -
+        <Link to="/items">items</Link> -
+        <Link to="/items?search=arduino">search</Link> -
+        <Link to="/items/MLA620085717">desc item</Link>
       </div>
     );
   }

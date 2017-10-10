@@ -6,9 +6,11 @@ export function apiEndpoint(endpoint, qs, fetchingFrom) {
   let query = '';
   let apiUrl = '';
 
+
   if (qs) {
     query = `?${qs}`;
   }
+
 
   if (fetchingFrom === 'server') {
     apiUrl = 'http://localhost:3000';
