@@ -20,24 +20,30 @@ class Items extends Component {
     return fetchPosts(fetchFrom, query);
   }
 
+  constructor(props){
+    super(props);
+    this.state = {
+        term: ''
+    }
+  }
+
   componentWillMount(){
    //console.log(this.props);
+    let term = this.props.location.search || '';
+    this.setState({ term })
   }
 
   componentDidMount() {
-    //console.log(this.props);
+    //console.log(this.props.posts);
     //let search = queryString.parse(search);
     //console.log(search);
     //console.log(isFirstRender(this.props.posts));
 
-    if (isFirstRender(this.props.posts)) {
-      let search = this.props.location.search;
-      if(search){
-        this.props.dispatch(Items.initialAction('client',search));
-      }else{
-        this.props.dispatch(Items.initialAction('client'));
-      }
-    }
+    this.props.dispatch(Items.initialAction('client', this.state.term));
+
+    /*if (isFirstRender(this.props.posts)) {
+      this.props.dispatch(Items.initialAction('client'));
+    }*/
   }
 
   render() {

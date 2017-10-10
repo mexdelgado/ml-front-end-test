@@ -42,7 +42,7 @@ const utils = {
 }
 
 const author = {
-  name: 'Maximiliano "Mex"',
+  name: 'Maximiliano Athuel',
   lastname: 'Delgado'
 };
 
