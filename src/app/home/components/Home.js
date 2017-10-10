@@ -10,15 +10,17 @@ class Home extends Component {
   render() {
     return (
       <div className="home">
+
         <div className="row">
-              <div className="col-xs-12">
-                <ol className="breadcrumb BreadcrumbCategories">
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">Library</a></li>
-                  <li className="active">Data</li>
-                </ol>
-            </div>
+            <div className="col-xs-12">
+              <ol className="breadcrumb BreadcrumbCategories">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Library</a></li>
+                <li className="active">Data</li>
+              </ol>
+          </div>
         </div>
+
         <div className="productList">
           <ul className="list">
             <li className="product-item">
@@ -71,7 +73,7 @@ class Home extends Component {
             </li>
           </ul>
         </div>
-        Home - <Link to="/about">About</Link> - <Link to="/blog">Blog</Link>
+
       </div>
     );
   }

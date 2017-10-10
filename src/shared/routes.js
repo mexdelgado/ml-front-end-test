@@ -4,11 +4,22 @@ import About from '../app/about/components/About';
 
 // Containers = se conecta con redux
 import Blog from '../app/blog';
+import Items from '../app/items';
 
 const routes = [
   {
     path: '/',
     component: Home,
+    exact: true
+  },
+  {
+    path: '/items',
+    component: Items,
+    exact: true
+  },
+  {
+    path: '/items/:id',
+    component: Items,
     exact: true
   },
   {
