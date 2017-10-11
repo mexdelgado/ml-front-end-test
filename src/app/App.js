@@ -5,9 +5,6 @@ import { BrowserRouter, StaticRouter, Switch, Route } from 'react-router-dom';
 // Routes
 import routes from '../shared/routes';
 
-//Components
-
-
 
 export default ({ server, location, context }) => {
   const routesMap = routes.map((route, i) => <Route key={i} {...route} />);

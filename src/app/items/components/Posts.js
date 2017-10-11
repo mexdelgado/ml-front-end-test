@@ -16,10 +16,11 @@ class Posts extends Component {
 
     const { posts } = this.props;
 
-    if (isFirstRender(posts)) {
+    /*if (isFirstRender(posts)) {
       return null;
-    }
+    }*/
 
+    console.log(posts);
     return (
       <div className="main-content">
         <SearchBox />

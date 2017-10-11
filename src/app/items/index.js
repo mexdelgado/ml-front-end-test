@@ -15,22 +15,41 @@ import { isFirstRender } from '../../shared/utils/data';
 
 class Items extends Component {
 
-  static initialAction(fetchFrom, query='') {
-    query = queryString.parse(query);
-    return fetchPosts(fetchFrom, query);
+  static initialAction(fetchFrom, query='', typeGet) {
+    //console.log('[i] TYPEGET 1: ',typeGet);
+    //console.log('[i] query 1: ',query);
+    if(typeGet==="all"){
+      query = queryString.parse(query);
+    }
+    return fetchPosts(fetchFrom, query, typeGet);
   }
 
   constructor(props){
     super(props);
     this.state = {
-        term: ''
+      term: ''
     }
   }
 
   componentWillMount(){
-   //console.log(this.props);
-    let term = this.props.location.search || '';
-    this.setState({ term })
+    //console.log(this.props);
+
+    const {
+      match: {
+        params: {
+          id = 0
+        }
+      },
+      location
+    } = this.props;
+
+    //console.log(this.props);
+    //console.log(id);
+
+    this.setState({
+      term:  location.search || ''
+    });
+
   }
 
   componentDidMount() {
@@ -39,7 +58,15 @@ class Items extends Component {
     //console.log(search);
     //console.log(isFirstRender(this.props.posts));
 
-    this.props.dispatch(Items.initialAction('client', this.state.term));
+    //console.log(this.props.match.params);
+
+    //console.log(id);
+
+    if(this.state.term){
+      this.props.dispatch(Items.initialAction('client', this.state.term, 'all'));
+    }else{
+      this.props.dispatch(Items.initialAction('client', this.props.match.params, 'single'));
+    }
 
     /*if (isFirstRender(this.props.posts)) {
       this.props.dispatch(Items.initialAction('client'));
