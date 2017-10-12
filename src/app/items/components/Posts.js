@@ -1,6 +1,6 @@
 // Dependencies
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter, StaticRouter, Switch, Route, Link} from 'react-router-dom';
 
 // Utils
 import { isFirstRender } from '../../../shared/utils/data';
@@ -14,18 +14,20 @@ import shippingIcon from '../../../../public/assets/images/ic_shipping@2x.png';
 class Posts extends Component {
   render() {
 
-    const { posts } = this.props;
+    const {
+      posts,
+      post,
+      show
+    } = this.props;
+    console.log(this.props);
 
-    /*if (isFirstRender(posts)) {
-      return null;
-    }*/
 
-    console.log(posts);
     return (
       <div className="main-content">
         <SearchBox />
         <div className="container">
-          <div className="posts">
+
+           <div className="posts">
 
             <div className="row">
                 <div className="col-xs-12">
@@ -61,6 +63,7 @@ class Posts extends Component {
             </div>
 
           </div>
+
         </div>
       </div>
     );

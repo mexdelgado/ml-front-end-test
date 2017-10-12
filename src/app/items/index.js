@@ -8,7 +8,7 @@ import queryString from 'query-string';
 import Posts from './components/Posts';
 
 // Action
-import { fetchPosts } from './actions';
+import { fetchPosts, fetchPost } from './actions';
 
 // Utils
 import { isFirstRender } from '../../shared/utils/data';
@@ -20,20 +20,21 @@ class Items extends Component {
     //console.log('[i] query 1: ',query);
     if(typeGet==="all"){
       query = queryString.parse(query);
+      return fetchPosts(fetchFrom, query);
+    }else{
+      return fetchPost(fetchFrom, query);
     }
-    return fetchPosts(fetchFrom, query, typeGet);
   }
 
   constructor(props){
     super(props);
     this.state = {
+      displaySingleItem: false,
       term: ''
     }
   }
 
   componentWillMount(){
-    //console.log(this.props);
-
     const {
       match: {
         params: {
@@ -47,6 +48,7 @@ class Items extends Component {
     //console.log(id);
 
     this.setState({
+      displaySingleItem: id > 0,
       term:  location.search || ''
     });
 
@@ -68,18 +70,25 @@ class Items extends Component {
       this.props.dispatch(Items.initialAction('client', this.props.match.params, 'single'));
     }
 
-    /*if (isFirstRender(this.props.posts)) {
-      this.props.dispatch(Items.initialAction('client'));
-    }*/
   }
 
   render() {
-    const { posts } = this.props;
-    //console.log(posts);
-    return <Posts posts={posts} />;
+    const {
+      posts,
+      post
+    } = this.props;
+
+    let show = 'all';
+
+    if (this.state.displaySingleItem && post.length > 0){
+      show = 'single';
+    }
+
+    return <Posts show={show} posts={posts} post={post} />;
   }
 }
 
 export default connect(({ items }) => ({
-  posts: items.posts
+  posts: items.posts,
+  post: items.post,
 }), null)(Items);

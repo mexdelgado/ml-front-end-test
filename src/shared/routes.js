@@ -1,6 +1,5 @@
 // Components
 import Home from '../app/home/components/Home';
-import About from '../app/about/components/About';
 
 // Containers = se conecta con redux
 import Blog from '../app/blog';
@@ -21,10 +20,6 @@ const routes = [
     path: '/items/:id',
     component: Items,
     exact: true
-  },
-  {
-    path: '/about',
-    component: About
   },
   {
     path: '/blog',
