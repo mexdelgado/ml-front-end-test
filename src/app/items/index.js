@@ -18,7 +18,7 @@ class Items extends Component {
   static initialAction(fetchFrom, query='', typeGet) {
     //console.log('[i] TYPEGET 1: ',typeGet);
     //console.log('[i] query 1: ',query);
-    if(typeGet==="all"){
+    if(typeGet === "all"){
       query = queryString.parse(query);
       return fetchProducts(fetchFrom, query);
     }else{
@@ -48,21 +48,13 @@ class Items extends Component {
     //console.log(id);
 
     this.setState({
-      displaySingleItem: id > 0,
+      displaySingleItem: id != '',
       term:  location.search || ''
     });
 
   }
 
   componentDidMount() {
-    //console.log(this.props.posts);
-    //let search = queryString.parse(search);
-    //console.log(search);
-    //console.log(isFirstRender(this.props.posts));
-
-    //console.log(this.props.match.params);
-
-    //console.log(id);
 
     if(this.state.term){
       this.props.dispatch(Items.initialAction('client', this.state.term, 'all'));
@@ -78,13 +70,15 @@ class Items extends Component {
       product
     } = this.props;
 
-    let show = 'all';
+    let typeget = 'all';
 
-    if (this.state.displaySingleItem && product.length > 0){
-      show = 'single';
+    if (this.state.displaySingleItem){
+      typeget = 'single';
     }
 
-    return <Products show={show} products={products} product={product} />;
+    console.log(typeget);
+
+    return <Products typeget={typeget} products={products} product={product} />;
   }
 }
 
