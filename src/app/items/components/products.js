@@ -11,12 +11,12 @@ import SearchBox from '../../global/components/SearchBox';
 // Assets
 import shippingIcon from '../../../../public/assets/images/ic_shipping@2x.png';
 
-class Posts extends Component {
+class Products extends Component {
   render() {
 
     const {
-      posts,
-      post,
+      products,
+      product,
       show
     } = this.props;
     console.log(this.props);
@@ -27,12 +27,12 @@ class Posts extends Component {
         <SearchBox />
         <div className="container">
 
-           <div className="posts">
+           <div className="products">
 
             <div className="row">
                 <div className="col-xs-12">
                   <ol className="breadcrumb BreadcrumbCategories">
-                    {posts.categories && posts.categories.map( category =>
+                    {products.categories && products.categories.map( category =>
                       <li key={category}><a href="javascript:void(0);">{category}</a></li>
                     )}
                   </ol>
@@ -42,7 +42,7 @@ class Posts extends Component {
             <div className="productList">
               <ul className="list">
 
-                {posts.items && posts.items.map(item =>
+                {products.items && products.items.map(item =>
                   <li key={item.id} className="product-item">
                     <Link to={`/items/${item.id}`}>
                     <div className="row">
@@ -70,4 +70,4 @@ class Posts extends Component {
   }
 }
 
-export default Posts;
+export default Products;

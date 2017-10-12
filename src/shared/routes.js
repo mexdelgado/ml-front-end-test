@@ -2,7 +2,6 @@
 import Home from '../app/home/components/Home';
 
 // Containers = se conecta con redux
-import Blog from '../app/blog';
 import Items from '../app/items';
 
 const routes = [
@@ -20,10 +19,6 @@ const routes = [
     path: '/items/:id',
     component: Items,
     exact: true
-  },
-  {
-    path: '/blog',
-    component: Blog
   }
 ];
 

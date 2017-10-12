@@ -1,12 +1,12 @@
 // Actions
-export const FETCH_POSTS = {
-  request: () => 'FETCH_POSTS_REQUEST',
-  success: () => 'FETCH_POSTS_SUCCESS',
-  error: () => 'FETCH_POSTS_ERROR'
+export const FETCH_PRODUCTS = {
+  request: () => 'FETCH_PRODUCTS_REQUEST',
+  success: () => 'FETCH_PRODUCTS_SUCCESS',
+  error: () => 'FETCH_PRODUCTS_ERROR'
 };
 
-export const FETCH_POST = {
-  request: () => 'FETCH_POST_REQUEST',
-  success: () => 'FETCH_POST_SUCCESS',
-  error: () => 'FETCH_POST_ERROR'
+export const FETCH_PRODUCT = {
+  request: () => 'FETCH_PRODUCT_REQUEST',
+  success: () => 'FETCH_PRODUCT_SUCCESS',
+  error: () => 'FETCH_PRODUCT_ERROR'
 };

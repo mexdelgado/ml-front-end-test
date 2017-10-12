@@ -1,25 +1,25 @@
 // Action Types
-import { FETCH_POSTS, FETCH_POST } from './actionTypes';
+import { FETCH_PRODUCTS, FETCH_PRODUCT } from './actionTypes';
 
 const initialState = {
-  posts: [],
-  post: []
+  products: [],
+  product: []
 };
 
-export default function blogReducer(state = initialState, action) {
+export default function mlReducer(state = initialState, action) {
   switch (action.type) {
 
-    case FETCH_POSTS.success(): {
+    case FETCH_PRODUCTS.success(): {
       return {
         ...state,
-        posts: action.payload
+        products: action.payload
       };
     }
 
-    case FETCH_POST.success(): {
+    case FETCH_PRODUCT.success(): {
       return {
         ...state,
-        post: action.payload
+        product: action.payload
       };
     }
 

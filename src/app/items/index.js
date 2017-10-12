@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import queryString from 'query-string';
 
 // Components
-import Posts from './components/Posts';
+import Products from './components/products';
 
 // Action
-import { fetchPosts, fetchPost } from './actions';
+import { fetchProducts, fetchProduct } from './actions';
 
 // Utils
 import { isFirstRender } from '../../shared/utils/data';
@@ -20,9 +20,9 @@ class Items extends Component {
     //console.log('[i] query 1: ',query);
     if(typeGet==="all"){
       query = queryString.parse(query);
-      return fetchPosts(fetchFrom, query);
+      return fetchProducts(fetchFrom, query);
     }else{
-      return fetchPost(fetchFrom, query);
+      return fetchProduct(fetchFrom, query);
     }
   }
 
@@ -74,21 +74,21 @@ class Items extends Component {
 
   render() {
     const {
-      posts,
-      post
+      products,
+      product
     } = this.props;
 
     let show = 'all';
 
-    if (this.state.displaySingleItem && post.length > 0){
+    if (this.state.displaySingleItem && product.length > 0){
       show = 'single';
     }
 
-    return <Posts show={show} posts={posts} post={post} />;
+    return <Products show={show} products={products} product={product} />;
   }
 }
 
 export default connect(({ items }) => ({
-  posts: items.posts,
-  post: items.post,
+  products: items.products,
+  product: items.product,
 }), null)(Items);

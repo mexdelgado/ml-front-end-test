@@ -5,12 +5,12 @@ import { API } from './constants';
 import { apiFetch } from '../../shared/utils/api';
 
 class MlApi {
-  static getAllPosts(query = {}, fetchingFrom = 'client') {
+  static getAllProducts(query = {}, fetchingFrom = 'client') {
     //console.log(query);
     return apiFetch(API.ML.ITEMS, { fetchingFrom }, query, 'all');
   }
 
-  static getPost(query = {}, fetchingFrom = 'client') {
+  static getProduct(query = {}, fetchingFrom = 'client') {
     //console.log(query);
     return apiFetch(API.ML.ITEMS, { fetchingFrom }, query, 'single');
   }

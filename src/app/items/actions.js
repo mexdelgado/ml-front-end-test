@@ -2,47 +2,47 @@
 import MlApi from './api';
 
 // Action Types
-import { FETCH_POSTS, FETCH_POST } from './actionTypes';
+import { FETCH_PRODUCTS, FETCH_PRODUCT } from './actionTypes';
 
 // ALL ITEMS
-export const fetchPosts = (fetchingFrom, query) => dispatch => {
+export const fetchProducts = (fetchingFrom, query) => dispatch => {
 
   //console.log('[i] TYPEGET 2: ',typeGet);
   //console.log(query);
 
-  const requestPosts = () => ({
-    type: FETCH_POSTS.request()
+  const requestProducts = () => ({
+    type: FETCH_PRODUCTS.request()
   });
 
-  const receivedPosts = posts => ({
-    type: FETCH_POSTS.success(),
-    payload: posts
+  const receivedProducts = products => ({
+    type: FETCH_PRODUCTS.success(),
+    payload: products
   });
 
-  dispatch(requestPosts());
+  dispatch(requestProducts());
 
-  return MlApi.getAllPosts(query, fetchingFrom)
-    .then(posts => dispatch(receivedPosts(posts)));
+  return MlApi.getAllProducts(query, fetchingFrom)
+    .then(products => dispatch(receivedProducts(products)));
 };
 
 // SINGLE ITEM
-export const fetchPost = (fetchingFrom, query) => dispatch => {
+export const fetchProduct = (fetchingFrom, query) => dispatch => {
 
   //console.log('[i] TYPEGET 2: ',typeGet);
   //console.log(query);
 
-  const requestPost = () => ({
-    type: FETCH_POST.request()
+  const requestProduct = () => ({
+    type: FETCH_PRODUCT.request()
   });
 
-  const receivedPost = post => ({
-    type: FETCH_POST.success(),
-    payload: post
+  const receivedProduct = product => ({
+    type: FETCH_PRODUCT.success(),
+    payload: product
   });
 
-  dispatch(requestPost());
+  dispatch(requestProduct());
 
-  return MlApi.getPost(query, fetchingFrom)
-    .then(post => dispatch(receivedPost(post)));
+  return MlApi.getProduct(query, fetchingFrom)
+    .then(product => dispatch(receivedProduct(product)));
 };
 
